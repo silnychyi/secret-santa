@@ -143,7 +143,7 @@ export default function Person({ encodedData }) {
                 Secret Assignment
               </p>
               <h1 className="text-2xl sm:text-3xl font-semibold text-center text-gray-900">
-                {giver}, you're gifting
+                {giver}, you&apos;re gifting
               </h1>
             </header>
             <p className="text-center text-4xl font-black text-red-500">
