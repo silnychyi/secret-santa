@@ -112,11 +112,9 @@ export default function Form() {
     `/?data=${encodeURIComponent(encoded)}`.replace(/\s/g, "%20");
 
   const handleCopy = (encoded, person) => {
-    const base =
-      typeof window !== "undefined"
-        ? window.location.origin
-        : "http://localhost";
-    const fullLink = `${base}${shareUrl(encoded)}`;
+    const fullLink = `${
+      window.location.origin + window.location.pathname
+    }${shareUrl(encoded)}`;
     copy(fullLink);
     setCopiedFor(person);
     setTimeout(() => setCopiedFor(""), 2000);
