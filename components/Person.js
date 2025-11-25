@@ -34,9 +34,7 @@ const decodePayload = (encoded) => {
 export default function Person({ encodedData }) {
   const payload = useMemo(() => decodePayload(encodedData), [encodedData]);
   const [isRevealed, setIsRevealed] = useState(false);
-  const [isShaking, setIsShaking] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
-  const revealTimeoutRef = useRef(null);
   const confettiTimeoutRef = useRef(null);
   const confettiPieces = useMemo(
     () =>
@@ -57,27 +55,20 @@ export default function Person({ encodedData }) {
   );
 
   const handleReveal = () => {
-    if (isRevealed || isShaking) {
+    if (isRevealed) {
       return;
     }
 
-    setIsShaking(true);
-    revealTimeoutRef.current = setTimeout(() => {
-      setIsShaking(false);
-      setIsRevealed(true);
-      setShowConfetti(true);
+    setIsRevealed(true);
+    setShowConfetti(true);
 
-      confettiTimeoutRef.current = setTimeout(() => {
-        setShowConfetti(false);
-      }, 2600);
-    }, 1400);
+    confettiTimeoutRef.current = setTimeout(() => {
+      setShowConfetti(false);
+    }, 2600);
   };
 
   useEffect(() => {
     return () => {
-      if (revealTimeoutRef.current) {
-        clearTimeout(revealTimeoutRef.current);
-      }
       if (confettiTimeoutRef.current) {
         clearTimeout(confettiTimeoutRef.current);
       }
@@ -131,11 +122,7 @@ export default function Person({ encodedData }) {
         <div className="relative z-10">
           <div
             className={`rounded-3xl bg-white/95 p-6 shadow space-y-4 ${
-              isShaking
-                ? "animate-reveal-shake"
-                : isRevealed
-                ? ""
-                : "animate-reveal-pulse"
+              isRevealed ? "" : "animate-reveal-pulse"
             }`}
           >
             <header>
