@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+:root {
+  --background: #d5e8ff;
+  --blue: #d5e8ff;
+  --red: #d5e8ff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-montserrat);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-montserrat);
+}
+
+button {
+  cursor: pointer;
+}
+
+@keyframes revealPulse {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.4);
+  }
+  70% {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -15px rgba(248, 113, 113, 0.6);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.4);
+  }
+}
+
+@keyframes revealShake {
+  0% {
+    transform: rotate(-6deg) translateX(-12px);
+  }
+  12% {
+    transform: rotate(6deg) translateX(14px);
+  }
+  24% {
+    transform: rotate(-5deg) translateX(-16px);
+  }
+  36% {
+    transform: rotate(5deg) translateX(16px);
+  }
+  48% {
+    transform: rotate(-4deg) translateX(-12px);
+  }
+  60% {
+    transform: rotate(4deg) translateX(10px);
+  }
+  72% {
+    transform: rotate(-3deg) translateX(-6px);
+  }
+  84% {
+    transform: rotate(2deg) translateX(4px);
+  }
+  100% {
+    transform: rotate(0deg) translateX(0);
+  }
+}
+
+.animate-reveal-pulse {
+  animation: revealPulse 2s ease-in-out infinite;
+}
+
+.animate-reveal-shake {
+  animation: revealShake 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.reveal-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.reveal-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-100%);
+  animation: buttonShimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes buttonShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  60% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.confetti-container {
+  position: absolute;
+  inset: -20px 0;
+  overflow: visible;
+  perspective: 600px;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  border-radius: 2px;
+  opacity: 0;
+  animation-name: confettiFall;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translate3d(0, -10px, 0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--confetti-x, 0px), 180px, 0) scale(0.9);
+    opacity: 0;
+  }
+}
