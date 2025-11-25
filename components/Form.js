@@ -264,7 +264,6 @@ export default function Form() {
                     </label>
                     <input
                       type="text"
-                      inputMode="decimal"
                       value={maxPrice}
                       onChange={(event) => setMaxPrice(event.target.value)}
                       placeholder="E.g. $30 or 30€"
