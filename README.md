@@ -2,6 +2,8 @@
 
 A free, easy-to-use web app for organizing Secret Santa gift exchanges
 
+[**View here**](https://silnychyi.github.io/secret-santa/)
+
 ## Features
 
 - Set gift budget limits
